@@ -10,6 +10,8 @@ public class part01 {
 	static String name = "すけさん";	// プレイヤーの名前
 	static int lv = 30;			// プレイヤーのレベル
 	static int hp = 30;
+	static int gold = 50;		// 初期所持金
+
 	public static void main( String[] args) throws java.io.IOException {
 
 		PutJyosyou();				// 序章を表示
@@ -32,7 +34,17 @@ public class part01 {
 	// 序章を表示します。
 	public static void PutJyosyou(){
 		put( "魔王が" + "世界を滅ぼそうとしています。" );
-		put( name + "はレベル" + lv + ",HP" + hp + "の強者です." );
+		putStatus();
+	}
+
+	public static void putStatus() {
+		put("---------------");
+		put("プレーヤーステータス");
+		put(" 名前	" + name);
+		put(" Lv	" + lv);
+		put(" HP	" + hp);
+		put(" 所持金	" + gold);
+		put("---------------");
 	}
 
 	// ゲームオーバー画面を表示します。
@@ -85,9 +97,12 @@ public class part01 {
 			if(hp < 0) {
 				hp = 0;
 			}
-			put("レベルが" + lv + "になった");
-			put("HPが" + hp + "になった");
+			put(name + "は技の鍛錬を行った");
+			putStatus();
 			if(hp <= 0) {
+				put("その時" + name + "の身体に異変が起きた");
+				put("過度の鍛錬により，遂に" + name + "の身体は限界を迎えたのだ");
+				put(name + "はその場に倒れ，それっきり動かなくなった");
 				put("GAME OVER");
 			}
 			else {
@@ -95,8 +110,12 @@ public class part01 {
 			}
 		}
 		else if(c == '3') {		// 3. 宿屋に泊まる
-			hp = lv;
-			put("HPが" + hp + "になった");
+			if(gold >= 10) {
+				hp = lv;
+				gold -= 10;
+				put("HPが回復した");
+			}
+			putStatus();
 			putCommand();
 		}
 	}

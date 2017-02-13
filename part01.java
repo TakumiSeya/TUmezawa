@@ -110,14 +110,23 @@ public class part01 {
 	*
 	*/
 	public static void putSygyou() throws java.io.IOException {
-		// HPを減らす
 		java.util.Random r = new java.util.Random();
+
+		// 敵出現数
+		int enamy = r.nextInt(5) + 1;
+		for(int i = 0; i < enamy; i++) {
+			System.out.print(" ( o_o ) ");
+		}
+		put("\n");
+		put("敵が" + enamy + "匹，現れた");
+		// HPを減らす
 		int damage = r.nextInt(8); // 0 <= damage < 8
 		hp -= damage;
 		if(hp < 0) {
 			hp = 0;
 		}
 
+		// レベリング
 		int exp = r.nextInt(5) + 1;
 		lv += exp;
 

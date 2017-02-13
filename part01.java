@@ -10,7 +10,7 @@ public class part01 {
 	static String name = "すけさん";	// プレイヤーの名前
 	static int lv = 30;			// プレイヤーのレベル
 	static int hp = 30;
-	static int gold = 50;		// 初期所持金
+	static int gold = 50000;		// 初期所持金
 
 	public static void main( String[] args) throws java.io.IOException {
 
@@ -92,12 +92,16 @@ public class part01 {
 			put("魔王が現れた！");
 		}
 		else if( c == '2' ){		// 2. 修行する
+			java.util.Random r = new java.util.Random();
+			int damage = r.nextInt(8); // 0 <= damage < 8
+
 			lv += 5;
-			hp -= 3;
+			hp -= damage;
 			if(hp < 0) {
 				hp = 0;
 			}
 			put(name + "は技の鍛錬を行った");
+			put(name + "は" + damage + "疲労した");
 			putStatus();
 			if(hp <= 0) {
 				put("その時" + name + "の身体に異変が起きた");

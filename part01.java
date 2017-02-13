@@ -142,8 +142,7 @@ public class part01 {
 		}
 
 		// レベリング
-		int exp = r.nextInt(5) + 1;
-		lv += exp;
+		lv += enamy;
 
 		put(name + "は技の鍛錬を行った");
 		put(name + "は" + damage + "疲労した");

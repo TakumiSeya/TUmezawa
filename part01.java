@@ -82,8 +82,8 @@ public class part01 {
 	}
 
 	public static void putCommand() throws java.io.IOException {
-		put( "1. すぐに魔王を倒しに行く" );
-		put( "2. 修行する" );
+		put("1. すぐに魔王を倒しに行く");
+		put("2. 修行する");
 		put("3. 宿屋に泊まる");
 
 		int c = inPutCommand();
@@ -92,26 +92,7 @@ public class part01 {
 			put("魔王が現れた！");
 		}
 		else if( c == '2' ){		// 2. 修行する
-			java.util.Random r = new java.util.Random();
-			int damage = r.nextInt(8); // 0 <= damage < 8
-
-			lv += 5;
-			hp -= damage;
-			if(hp < 0) {
-				hp = 0;
-			}
-			put(name + "は技の鍛錬を行った");
-			put(name + "は" + damage + "疲労した");
-			putStatus();
-			if(hp <= 0) {
-				put("その時" + name + "の身体に異変が起きた");
-				put("過度の鍛錬により，遂に" + name + "の身体は限界を迎えたのだ");
-				put(name + "はその場に倒れ，それっきり動かなくなった");
-				put("GAME OVER");
-			}
-			else {
-				putCommand();
-			}
+			putSygyou();
 		}
 		else if(c == '3') {		// 3. 宿屋に泊まる
 			if(gold >= 10) {
@@ -120,6 +101,36 @@ public class part01 {
 				put("HPが回復した");
 			}
 			putStatus();
+			putCommand();
+		}
+	}
+
+	/**
+	* 修行する
+	*
+	*/
+	public static void putSygyou() throws java.io.IOException {
+		// HPを減らす
+		java.util.Random r = new java.util.Random();
+		int damage = r.nextInt(8); // 0 <= damage < 8
+		hp -= damage;
+		if(hp < 0) {
+			hp = 0;
+		}
+
+		int exp = r.nextInt(5) + 1;
+		lv += exp;
+
+		put(name + "は技の鍛錬を行った");
+		put(name + "は" + damage + "疲労した");
+		putStatus();
+		if(hp <= 0) {
+			put("その時" + name + "の身体に異変が起きた");
+			put("過度の鍛錬により，遂に" + name + "の身体は限界を迎えたのだ");
+			put(name + "はその場に倒れ，それっきり動かなくなった");
+			put("GAME OVER");
+		}
+		else {
 			putCommand();
 		}
 	}

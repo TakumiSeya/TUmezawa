@@ -86,22 +86,27 @@ public class part01 {
 		put("2. 修行する");
 		put("3. 宿屋に泊まる");
 
-		int c = inPutCommand();
-
-		if(c == '1') {		// 1. すぐに魔王を倒しに行く
-			put("魔王が現れた！");
-		}
-		else if( c == '2' ){		// 2. 修行する
-			putSygyou();
-		}
-		else if(c == '3') {		// 3. 宿屋に泊まる
-			if(gold >= 10) {
-				hp = lv;
-				gold -= 10;
-				put("HPが回復した");
+		switch(inPutCommand()) {
+			case '1':
+			{
+				put("魔王が現れた！");
+				break;
 			}
-			putStatus();
-			putCommand();
+			case '2':
+			{
+				putSygyou();
+				break;
+			}
+			case '3':
+			{
+				if(gold >= 10) {
+					hp = lv;
+					gold -= 10;
+					put("HPが回復した");
+				}
+				putStatus();
+				putCommand();
+			}
 		}
 	}
 
@@ -114,11 +119,21 @@ public class part01 {
 
 		// 敵出現数
 		int enamy = r.nextInt(5) + 1;
+		String enamyImage1 = "   人   ";
+		String enamyImage2 = " ( o_o) ";
 		for(int i = 0; i < enamy; i++) {
-			System.out.print(" ( o_o ) ");
+			if(i == enamy -1) {
+				put(enamyImage1);
+				break;
+			}
+			System.out.print(enamyImage1);
+		}
+		for(int i = 0; i < enamy; i++) {
+			System.out.print(enamyImage2);
 		}
 		put("\n");
 		put("敵が" + enamy + "匹，現れた");
+
 		// HPを減らす
 		int damage = r.nextInt(8); // 0 <= damage < 8
 		hp -= damage;

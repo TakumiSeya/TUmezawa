@@ -16,8 +16,8 @@ public class part01 {
 
 		putCommand();				// コマンドを表示
 
-		if(hp == 0) {
-			return;
+		if(hp <= 0) {
+			return;						// プログラムを終了する
 		}
 
 		// 魔王を倒しに行く
@@ -72,24 +72,31 @@ public class part01 {
 	public static void putCommand() throws java.io.IOException {
 		put( "1. すぐに魔王を倒しに行く" );
 		put( "2. 修行する" );
+		put("3. 宿屋に泊まる");
 
 		int c = inPutCommand();
 
-		if(c == '1') {
+		if(c == '1') {		// 1. すぐに魔王を倒しに行く
 			put("魔王が現れた！");
 		}
-		else if( c == '2' ){
+		else if( c == '2' ){		// 2. 修行する
 			lv += 5;
 			hp -= 3;
+			if(hp < 0) {
+				hp = 0;
+			}
 			put("レベルが" + lv + "になった");
 			put("HPが" + hp + "になった");
-			if(hp == 0) {
+			if(hp <= 0) {
 				put("GAME OVER");
 			}
 			else {
 				putCommand();
 			}
-
+		}
+		else if(c == '3') {		// 3. 宿屋に泊まる
+			hp = lv;
+			put("HPが" + hp + "になった");
 			putCommand();
 		}
 	}
